@@ -7,7 +7,7 @@ spring:
     name: scm
   datasource: #连接数据库配置
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/scm_db?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8
+    url: jdbc:mysql:///scm_db?characterEncoding=utf8&useUnicode=true&useSSL=false&serverTimezone=UTC
     username: root
     password: root
   servlet: #文件上传配置

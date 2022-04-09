@@ -13,7 +13,7 @@ import java.util.Date;
 public class ScmUser implements Serializable,Cloneable{
     /** 用户号 */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer uId ;
     /** 住户号 */
     private Integer hId ;
