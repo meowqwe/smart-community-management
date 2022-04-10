@@ -20,7 +20,7 @@ public class ScmUserServiceImpl implements ScmUserService {
         Example example = new Example(ScmUser.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("uName",name);
-        criteria.andEqualTo("uName",password);
+        criteria.andEqualTo("uPassword",password);
         ScmUser user = scmUserMapper.selectOneByExample(example);
         return user;
     }

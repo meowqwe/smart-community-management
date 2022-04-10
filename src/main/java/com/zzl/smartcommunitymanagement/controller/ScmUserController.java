@@ -8,7 +8,9 @@ import com.zzl.smartcommunitymanagement.service.ScmUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zzl
@@ -23,12 +25,23 @@ public class ScmUserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Result login(@RequestBody String name,@RequestBody String password) {
-        ScmUser scmUser = scmUserService.findByNameAndPassword(name,password);
-        if (scmUser != null){
-
+    public Result login(HttpSession session, @RequestBody Map<String,String> request) {
+        String name = "";
+        String password = "";
+        if (request.get("username") != null)
+        {
+            name = request.get("username");
         }
-        return new Result(false,200,"请求成功");
+        if (request.get("password") != null)
+        {
+            password = request.get("password");
+        }
+        ScmUser scmUser = scmUserService.findByNameAndPassword(name,password);
+        if (scmUser == null){
+            return  new Result(false,StatusCode.LOGINERROR,"用户名或密码错误");
+        }
+        session.setAttribute("user", scmUser);
+        return new Result(true,StatusCode.OK,"请求成功",scmUser);
     }
 
     @RequestMapping("/searchByName")
