@@ -18,7 +18,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/scmuser")
-public class ScmUserController {
+public class ScmLoginController {
 
     @Autowired
     private ScmUserService scmUserService;
@@ -42,6 +42,12 @@ public class ScmUserController {
         }
         session.setAttribute("user", scmUser);
         return new Result(true,StatusCode.OK,"请求成功",scmUser);
+    }
+
+    @RequestMapping("/logout")
+    public Result logout(HttpSession session) {
+        session.removeAttribute("user");
+        return new Result(true, StatusCode.OK,"注销成功!");
     }
 
     @RequestMapping("/searchByName")
