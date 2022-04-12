@@ -13,7 +13,7 @@ import java.util.Date;
 public class ScmRent implements Serializable,Cloneable{
     /** 租房信息号 */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer rId ;
     /** 住户信息 */
     private Integer hId ;

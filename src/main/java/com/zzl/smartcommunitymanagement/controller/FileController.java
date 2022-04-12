@@ -7,6 +7,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -35,6 +36,7 @@ public class FileController {
      * @return : com.zzl.smartcommunitymanagement.common.Result
      */
     @RequestMapping(value="/fileupload")
+    @ResponseBody
     public Result uploads(@RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws IOException {
         //获取当前项目所在绝对路径
         String absolutePath = System.getProperty("user.dir");
@@ -112,6 +114,7 @@ public class FileController {
      * @return : com.zzl.smartcommunitymanagement.common.Result
      */
     @RequestMapping(value="/delfile")
+    @ResponseBody
     public Result fileDel(@RequestParam String fileName){
         String name = fileName.replace("/fileupload/","");
         //获取当前项目所在绝对路径

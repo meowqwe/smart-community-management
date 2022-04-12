@@ -22,5 +22,5 @@ public interface ScmCarportService {
      * 更新
      * @param carport
      */
-    public void update(ScmCarport carport);
+    public Integer update(ScmCarport carport);
 }

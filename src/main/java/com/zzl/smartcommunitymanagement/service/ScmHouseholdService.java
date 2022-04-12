@@ -17,7 +17,7 @@ public interface ScmHouseholdService {
     /**
      * 更新住户信息
      */
-    public void updateHousehold(ScmHousehold household);
+    public Integer updateHousehold(ScmHousehold household);
 
     /**
      * 根据主键查询住户信息

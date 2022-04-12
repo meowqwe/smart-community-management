@@ -13,7 +13,7 @@ public class ScmBillServiceImpl implements ScmBillService {
     private ScmBillMapper scmBillMapper;
 
     @Override
-    public void addBill(ScmBill bill) {
-        scmBillMapper.insert(bill);
+    public Integer addBill(ScmBill bill) {
+        return scmBillMapper.insert(bill);
     }
 }

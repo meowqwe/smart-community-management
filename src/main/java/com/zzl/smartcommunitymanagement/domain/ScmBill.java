@@ -13,7 +13,7 @@ import java.util.Date;
 public class ScmBill implements Serializable,Cloneable{
     /** 账单号 */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bId ;
     /** 创建人 */
     private Integer cId ;

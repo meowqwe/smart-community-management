@@ -10,5 +10,5 @@ public interface ScmBillService {
     /**
      * 添加一个账单
      */
-    public void addBill(ScmBill bill);
+    public Integer addBill(ScmBill bill);
 }

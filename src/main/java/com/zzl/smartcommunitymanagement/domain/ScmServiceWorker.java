@@ -13,11 +13,9 @@ import java.util.Date;
 public class ScmServiceWorker implements Serializable,Cloneable {
     /** 服务号 */
     @Id
-    @GeneratedValue
     private Integer sId ;
     /** 工号 */
     @Id
-    @GeneratedValue
     private Integer wId ;
 
     /** 服务号 */

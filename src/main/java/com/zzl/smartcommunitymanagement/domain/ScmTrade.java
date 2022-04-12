@@ -13,10 +13,10 @@ import java.util.Date;
 public class ScmTrade implements Serializable,Cloneable{
     /** 交易信息号 */
     @Id
-    @GeneratedValue
-    private String tId ;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer tId ;
     /** 创建人 */
-    private String cId ;
+    private Integer cId ;
     /** 创建时间 */
     private Date cTime ;
     /** 更新时间 */
@@ -31,19 +31,19 @@ public class ScmTrade implements Serializable,Cloneable{
     private String tState ;
 
     /** 交易信息号 */
-    public String getTId(){
+    public Integer getTId(){
         return this.tId;
     }
     /** 交易信息号 */
-    public void setTId(String tId){
+    public void setTId(Integer tId){
         this.tId=tId;
     }
     /** 创建人 */
-    public String getCId(){
+    public Integer getCId(){
         return this.cId;
     }
     /** 创建人 */
-    public void setCId(String cId){
+    public void setCId(Integer cId){
         this.cId=cId;
     }
     /** 创建时间 */

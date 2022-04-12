@@ -20,8 +20,8 @@ public class ScmHouseholdServiceImpl implements ScmHouseholdService {
     }
 
     @Override
-    public void updateHousehold(ScmHousehold household) {
-        scmhouseholdMapper.updateByPrimaryKey(household);
+    public Integer updateHousehold(ScmHousehold household) {
+        return scmhouseholdMapper.updateByPrimaryKey(household);
     }
 
     @Override

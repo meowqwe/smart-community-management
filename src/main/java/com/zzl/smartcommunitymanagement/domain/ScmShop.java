@@ -13,7 +13,7 @@ import java.util.Date;
 public class ScmShop implements Serializable,Cloneable{
     /** 商铺号 */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String shId ;
     /** 商铺名 */
     private String shName ;

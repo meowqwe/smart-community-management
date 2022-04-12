@@ -13,7 +13,7 @@ import java.util.Date;
 public class ScmProblem implements Serializable,Cloneable{
     /** 问题号 */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pId ;
     /** 问题内容 */
     private String pName ;

@@ -13,7 +13,7 @@ import java.util.Date;
 public class ScmCommunityService implements Serializable,Cloneable{
     /** 服务号 */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer sId ;
     /** 服务项目名 */
     private String sName ;

@@ -30,7 +30,7 @@ public class ScmCarportServiceImpl implements ScmCarportService {
     }
 
     @Override
-    public void update(ScmCarport carport) {
-        scmCarportMapper.updateByPrimaryKey(carport);
+    public Integer update(ScmCarport carport) {
+        return scmCarportMapper.updateByPrimaryKey(carport);
     }
 }

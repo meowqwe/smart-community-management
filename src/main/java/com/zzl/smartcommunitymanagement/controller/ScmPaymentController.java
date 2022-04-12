@@ -39,6 +39,11 @@ public class ScmPaymentController {
     @Autowired
     private ScmCarportService scmCarportService;
 
+    /**
+     * 当前登录用户缴纳所在住户物业费，并创建订单
+     * @param session
+     * @return
+     */
     @RequestMapping("/managementfee")
     @ResponseBody
     public Result managementFee(HttpSession session) {
@@ -77,6 +82,10 @@ public class ScmPaymentController {
         return new Result(true, StatusCode.OK, "缴费成功");
     }
 
+    /**
+     * 更新所有物业费缴纳状态
+     * @return
+     */
     @RequestMapping("/updateHousehold")
     @ResponseBody
     public Result updateHouseholdState() {
@@ -91,19 +100,29 @@ public class ScmPaymentController {
         return new Result(true, StatusCode.OK,"更新成功");
     }
 
+    /**
+     * 当前登录用户为指定车位缴纳车位费
+     * @param session
+     * @param request
+     * @return
+     */
     @RequestMapping("/carportfee")
     @ResponseBody
-    public Result carportFee(HttpSession session,@RequestBody Map<String, Integer> request) {
+    public Result carportFee(HttpSession session,@RequestBody Map<String, String> request) {
         // 获取当前登录用户
         ScmUser user = (ScmUser) session.getAttribute("user");
         int uid = user.getUId();
-        int cid = 0;
-        if (request.get("cid") != null)
+        int cpid = 0;
+        if (request.get("id") != null)
         {
-            cid = request.get("cid");
+            cpid = Integer.valueOf(request.get("id"));
         }
         // 获取待缴费车位
-        ScmCarport carport = scmCarportService.findById(cid);
+        ScmCarport carport = scmCarportService.findById(cpid);
+        if (carport == null)
+        {
+            return new Result(false,StatusCode.ERROR,"查询不到车位");
+        }
         // 更新下次到期时间
         Date now = new Date();
         Date base = carport.getExTime();

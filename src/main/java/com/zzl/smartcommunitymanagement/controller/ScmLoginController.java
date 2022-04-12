@@ -23,6 +23,12 @@ public class ScmLoginController {
     @Autowired
     private ScmUserService scmUserService;
 
+    /**
+     * 用户登录并设置Session
+     * @param session
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Result login(HttpSession session, @RequestBody Map<String,String> request) {
@@ -44,14 +50,26 @@ public class ScmLoginController {
         return new Result(true,StatusCode.OK,"请求成功",scmUser);
     }
 
+    /**
+     * 用户登出并移除Session
+     * @param session
+     * @return
+     */
     @RequestMapping("/logout")
+    @ResponseBody
     public Result logout(HttpSession session) {
         session.removeAttribute("user");
         return new Result(true, StatusCode.OK,"注销成功!");
     }
 
+    /**
+     * 根据用户名查找所有用户
+     * @param name
+     * @return
+     */
     @RequestMapping("/searchByName")
-    public Result searchByName(@RequestBody String name) {
+    @ResponseBody
+    public Result searchByName(@RequestBody String name) { //TODO
         List<ScmUser> list = scmUserService.searchByName(name);
         return new Result(true,StatusCode.OK,"查询用户成功",list);
     }

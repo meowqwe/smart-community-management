@@ -13,10 +13,10 @@ import java.util.Date;
 public class ScmHousehold implements Serializable,Cloneable{
     /** 住户号 */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer hId ;
     /** 楼号 */
-    private Integer hBulding ;
+    private Integer hBuilding ;
     /** 门牌号 */
     private Integer hNumber ;
     /** 房屋面积 */
@@ -38,11 +38,11 @@ public class ScmHousehold implements Serializable,Cloneable{
     }
     /** 楼号 */
     public Integer getHBulding(){
-        return this.hBulding;
+        return this.hBuilding;
     }
     /** 楼号 */
     public void setHBulding(Integer hBulding){
-        this.hBulding=hBulding;
+        this.hBuilding=hBulding;
     }
     /** 门牌号 */
     public Integer getHNumber(){

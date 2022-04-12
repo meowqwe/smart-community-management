@@ -28,6 +28,11 @@ public class ScmCarportController {
     @Autowired
     private ScmHouseholdService scmHouseholdService;
 
+    /**
+     * 根据当前登录用户查询其所属住户的所有车位
+     * @param session
+     * @return
+     */
     @RequestMapping("/findByUser")
     @ResponseBody
     public PageResult findByUser(HttpSession session) {

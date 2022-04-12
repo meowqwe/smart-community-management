@@ -13,7 +13,7 @@ import java.util.Date;
 public class ScmCarport implements Serializable,Cloneable{
     /** 车位号 */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer cpId ;
     /** 住户号 */
     private Integer hId ;
