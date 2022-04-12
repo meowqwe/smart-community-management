@@ -9,6 +9,7 @@ public interface ScmUserService {
      * 根据用户名和密码查找
      */
     public ScmUser findByNameAndPassword(String name,String password);
+
     /**
      * 根据用户名称查找
      */
