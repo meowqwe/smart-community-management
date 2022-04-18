@@ -2,6 +2,7 @@ package com.zzl.smartcommunitymanagement.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -18,9 +19,9 @@ public class ScmTrade implements Serializable,Cloneable{
     /** 创建人 */
     private Integer cId ;
     /** 创建时间 */
-    private Date cTime ;
+    private LocalDateTime cTime ;
     /** 更新时间 */
-    private Date uTime ;
+    private LocalDateTime uTime ;
     /** 商品名 */
     private String tName ;
     /** 商品数量 */
@@ -29,6 +30,8 @@ public class ScmTrade implements Serializable,Cloneable{
     private Double tPrice ;
     /** 商品状态;是否在售 */
     private String tState ;
+    /** 联系方式 */
+    private String tContact ;
 
     /** 交易信息号 */
     public Integer getTId(){
@@ -47,19 +50,19 @@ public class ScmTrade implements Serializable,Cloneable{
         this.cId=cId;
     }
     /** 创建时间 */
-    public Date getCTime(){
+    public LocalDateTime getCTime(){
         return this.cTime;
     }
     /** 创建时间 */
-    public void setCTime(Date cTime){
+    public void setCTime(LocalDateTime cTime){
         this.cTime=cTime;
     }
     /** 更新时间 */
-    public Date getUTime(){
+    public LocalDateTime getUTime(){
         return this.uTime;
     }
     /** 更新时间 */
-    public void setUTime(Date uTime){
+    public void setUTime(LocalDateTime uTime){
         this.uTime=uTime;
     }
     /** 商品名 */
@@ -93,5 +96,13 @@ public class ScmTrade implements Serializable,Cloneable{
     /** 商品状态;是否在售 */
     public void setTState(String tState){
         this.tState=tState;
+    }
+    /** 联系方式 */
+    public String getTContact(){
+        return this.tContact;
+    }
+    /** 联系方式 */
+    public void setTContact(String tContact){
+        this.tContact=tContact;
     }
 }

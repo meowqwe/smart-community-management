@@ -2,6 +2,7 @@ package com.zzl.smartcommunitymanagement.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -18,7 +19,7 @@ public class ScmBill implements Serializable,Cloneable{
     /** 创建人 */
     private Integer cId ;
     /** 创建时间 */
-    private Date cTime ;
+    private LocalDateTime cTime ;
     /** 账单类型 */
     private String bType ;
     /** 账单类型关联id */
@@ -45,11 +46,11 @@ public class ScmBill implements Serializable,Cloneable{
         this.cId=cId;
     }
     /** 创建时间 */
-    public Date getCTime(){
+    public LocalDateTime getCTime(){
         return this.cTime;
     }
     /** 创建时间 */
-    public void setCTime(Date cTime){
+    public void setCTime(LocalDateTime cTime){
         this.cTime=cTime;
     }
     /** 账单类型 */

@@ -2,6 +2,7 @@ package com.zzl.smartcommunitymanagement.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -26,7 +27,7 @@ public class ScmHousehold implements Serializable,Cloneable{
     /** 物业费状态;是否已交物业费 */
     private String hState ;
     /** 更新时间 */
-    private Date hTime ;
+    private LocalDateTime hTime ;
 
     /** 住户号 */
     public Integer getHId(){
@@ -77,11 +78,11 @@ public class ScmHousehold implements Serializable,Cloneable{
         this.hState=hState;
     }
     /** 更新时间 */
-    public Date getHTime(){
+    public LocalDateTime getHTime(){
         return this.hTime;
     }
     /** 更新时间 */
-    public void setHTime(Date hTime){
+    public void setHTime(LocalDateTime hTime){
         this.hTime=hTime;
     }
 }

@@ -2,6 +2,7 @@ package com.zzl.smartcommunitymanagement.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -20,7 +21,7 @@ public class ScmRent implements Serializable,Cloneable{
     /** 创建人 */
     private Integer cId ;
     /** 创建时间 */
-    private Date cTime ;
+    private LocalDateTime cTime ;
     /** 房屋状态;是否已出租 */
     private String rState ;
     /** 审核状态;是否通过审核 */
@@ -28,11 +29,13 @@ public class ScmRent implements Serializable,Cloneable{
     /** 租房价格 */
     private Double rPrice ;
     /** 租房时间 */
-    private Date rTime ;
+    private LocalDateTime rTime ;
     /** 房屋图片 */
     private String rPicture ;
     /** 房屋描述 */
     private String rDescription ;
+    /** 联系方式 */
+    private String rContact ;
 
     /** 租房信息号 */
     public Integer getRId(){
@@ -59,11 +62,11 @@ public class ScmRent implements Serializable,Cloneable{
         this.cId=cId;
     }
     /** 创建时间 */
-    public Date getCTime(){
+    public LocalDateTime getCTime(){
         return this.cTime;
     }
     /** 创建时间 */
-    public void setCTime(Date cTime){
+    public void setCTime(LocalDateTime cTime){
         this.cTime=cTime;
     }
     /** 房屋状态;是否已出租 */
@@ -91,11 +94,12 @@ public class ScmRent implements Serializable,Cloneable{
         this.rPrice=rPrice;
     }
     /** 租房时间 */
-    public Date getRTime(){
+    public LocalDateTime getRTime(){
         return this.rTime;
     }
-    /** 租房时间 */
-    public void setRTime(Date rTime){
+    /** 租房时间
+     * @param rTime*/
+    public void setRTime(LocalDateTime rTime){
         this.rTime=rTime;
     }
     /** 房屋图片 */
@@ -113,5 +117,13 @@ public class ScmRent implements Serializable,Cloneable{
     /** 房屋描述 */
     public void setRDescription(String rDescription){
         this.rDescription=rDescription;
+    }
+    /** 联系方式 */
+    public String getRContact(){
+        return this.rContact;
+    }
+    /** 联系方式 */
+    public void setRContact(String rContact){
+        this.rContact=rContact;
     }
 }

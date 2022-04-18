@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -43,6 +44,7 @@ public class ScmPaymentController {
      * 当前登录用户缴纳所在住户物业费，并创建订单
      * @param session
      * @return
+     * 接口测试完成
      */
     @RequestMapping("/managementfee")
     @ResponseBody
@@ -57,14 +59,11 @@ public class ScmPaymentController {
             return new Result(false,StatusCode.ERROR,"目前没有绑定住户");
         }
         // 更新下次到期时间
-        Date now = new Date();
-        Date base = household.getHTime();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(base);
-        calendar.add(Calendar.MONTH,+1);
-        household.setHTime(calendar.getTime());
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime base = household.getHTime();
+        household.setHTime(base.plusMonths(1l));
         // 修改缴费状态
-        if (household.getHState().equals("0")  && household.getHTime().after(now)) {
+        if (household.getHState().equals("0")  && household.getHTime().isAfter(now)) {
             household.setHState("1");
         }
         // 创建账单
@@ -85,6 +84,7 @@ public class ScmPaymentController {
     /**
      * 更新所有物业费缴纳状态
      * @return
+     * 接口测试成功
      */
     @RequestMapping("/updateHousehold")
     @ResponseBody
@@ -92,7 +92,7 @@ public class ScmPaymentController {
         List<ScmHousehold> all = scmHouseholdService.findAll();
         for (ScmHousehold h : all) {
             // 如果过期则更新状态为未交
-            if (h.getHState() == "1" && h.getHTime().before(new Date())) {
+            if (h.getHState() == "1" && h.getHTime().isBefore(LocalDateTime.now())) {
                 h.setHState("0");
                 scmHouseholdService.updateHousehold(h);
             }
@@ -105,17 +105,18 @@ public class ScmPaymentController {
      * @param session
      * @param request
      * @return
+     * 接口测试成功
      */
     @RequestMapping("/carportfee")
     @ResponseBody
-    public Result carportFee(HttpSession session,@RequestBody Map<String, String> request) {
+    public Result carportFee(HttpSession session,@RequestBody Map request) {
         // 获取当前登录用户
         ScmUser user = (ScmUser) session.getAttribute("user");
         int uid = user.getUId();
         int cpid = 0;
         if (request.get("id") != null)
         {
-            cpid = Integer.valueOf(request.get("id"));
+            cpid = Integer.parseInt((String) request.get("id"));
         }
         // 获取待缴费车位
         ScmCarport carport = scmCarportService.findById(cpid);
@@ -124,12 +125,9 @@ public class ScmPaymentController {
             return new Result(false,StatusCode.ERROR,"查询不到车位");
         }
         // 更新下次到期时间
-        Date now = new Date();
-        Date base = carport.getExTime();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(base);
-        calendar.add(Calendar.MONTH,+1);
-        carport.setExTime((calendar.getTime()));
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime base = carport.getExTime();
+        carport.setExTime(base.plusMonths(1l));
         // 创建账单
         ScmBill bill = new ScmBill();
         bill.setCId(uid);

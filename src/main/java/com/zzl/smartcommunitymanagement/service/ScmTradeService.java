@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.zzl.smartcommunitymanagement.domain.ScmTrade;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ScmTradeService {
 
@@ -21,8 +22,25 @@ public interface ScmTradeService {
 
     /**
      * 查询所有可用交易
+     * pageNum pageSize
      * @return
      */
-    public Page<ScmTrade> findAllActive(Integer pageNum,Integer pageSize);
+    public Page<ScmTrade> findAllActive(Map searchMap);
+
+    /**
+     * 根据条件查询
+     * @param searchMap
+     * name pageNum pageSize startPrice endPrice
+     * @return
+     */
+    public Page<ScmTrade> search(Map searchMap);
+
+    /**
+     * 根据用户id查询
+     * @param searchMap
+     * pageNum pageSize
+     * @return
+     */
+    public Page<ScmTrade> findByUserId(Integer uid, Map searchMap);
 
 }

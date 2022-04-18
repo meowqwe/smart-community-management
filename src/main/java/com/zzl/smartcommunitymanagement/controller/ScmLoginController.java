@@ -1,5 +1,6 @@
 package com.zzl.smartcommunitymanagement.controller;
 
+import com.github.pagehelper.Page;
 import com.zzl.smartcommunitymanagement.common.PageResult;
 import com.zzl.smartcommunitymanagement.common.Result;
 import com.zzl.smartcommunitymanagement.common.StatusCode;
@@ -7,6 +8,7 @@ import com.zzl.smartcommunitymanagement.domain.ScmUser;
 import com.zzl.smartcommunitymanagement.service.ScmUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tk.mybatis.mapper.util.StringUtil;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -28,19 +30,20 @@ public class ScmLoginController {
      * @param session
      * @param request
      * @return
+     * 测试完成
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Result login(HttpSession session, @RequestBody Map<String,String> request) {
+    public Result login(HttpSession session, @RequestBody Map request) {
         String name = "";
         String password = "";
-        if (request.get("username") != null)
+        if (StringUtil.isEmpty((String) request.get("username")))
         {
-            name = request.get("username");
+            name = (String) request.get("username");
         }
-        if (request.get("password") != null)
+        if (StringUtil.isEmpty((String) request.get("password")))
         {
-            password = request.get("password");
+            password = (String) request.get("password");
         }
         ScmUser scmUser = scmUserService.findByNameAndPassword(name,password);
         if (scmUser == null){
@@ -54,6 +57,7 @@ public class ScmLoginController {
      * 用户登出并移除Session
      * @param session
      * @return
+     * 接口测试完成
      */
     @RequestMapping("/logout")
     @ResponseBody
@@ -64,13 +68,13 @@ public class ScmLoginController {
 
     /**
      * 根据用户名查找所有用户
-     * @param name
+     * @param searchMap
      * @return
      */
     @RequestMapping("/searchByName")
     @ResponseBody
-    public Result searchByName(@RequestBody String name) { //TODO
-        List<ScmUser> list = scmUserService.searchByName(name);
-        return new Result(true,StatusCode.OK,"查询用户成功",list);
+    public PageResult searchByName(@RequestBody Map searchMap) {
+        Page<ScmUser> list = scmUserService.searchByName(searchMap);
+        return new PageResult(true,StatusCode.OK,"查询用户成功",list,(long)list.size());
     }
 }

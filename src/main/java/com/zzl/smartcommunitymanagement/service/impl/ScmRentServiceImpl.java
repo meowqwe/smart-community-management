@@ -2,85 +2,83 @@ package com.zzl.smartcommunitymanagement.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.zzl.smartcommunitymanagement.dao.ScmTradeMapper;
+import com.zzl.smartcommunitymanagement.dao.ScmRentMapper;
+import com.zzl.smartcommunitymanagement.domain.ScmRent;
 import com.zzl.smartcommunitymanagement.domain.ScmTrade;
-import com.zzl.smartcommunitymanagement.service.ScmTradeService;
+import com.zzl.smartcommunitymanagement.service.ScmRentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.StringUtil;
 
-import java.util.List;
 import java.util.Map;
 
 @Service
-public class ScmTradeServiceImpl implements ScmTradeService {
+public class ScmRentServiceImpl implements ScmRentService {
 
     @Autowired
-    private ScmTradeMapper scmTradeMapper;
+    ScmRentMapper scmRentMapper;
 
     @Override
-    public Integer addTrade(ScmTrade trade) {
-        return scmTradeMapper.insert(trade);
+    public Integer addRent(ScmRent rent) {
+        return scmRentMapper.insert(rent);
     }
 
     @Override
-    public Integer deleteById(Integer id) {
-        Example example = new Example(ScmTrade.class);
-        Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("tId",id);
-        return scmTradeMapper.deleteByExample(example);
+    public Integer deleteRentById(Integer rid) {
+        return scmRentMapper.deleteByPrimaryKey(rid);
     }
 
     @Override
-    public Page<ScmTrade> findAllActive(Map searchMap) {
+    public Page<ScmRent> search(Map searchMap) {
         int pageNum = 1;
         int pageSize = 10;
         Example example = new Example(ScmTrade.class);
         if (searchMap != null){
             Example.Criteria criteria = example.createCriteria();
-            if (StringUtil.isNotEmpty((String) searchMap.get("pageNum"))){
-                pageNum = Integer.parseInt((String) searchMap.get("pageNum"));
-            }
-            if (StringUtil.isNotEmpty((String) searchMap.get("pageSize"))){
-                pageSize = Integer.parseInt((String) searchMap.get("pageSize"));
-            }
-            criteria.andEqualTo("tState","1");
-        }
-        PageHelper.startPage(pageNum, pageSize);
-        Page<ScmTrade> result = (Page<ScmTrade>) scmTradeMapper.selectByExample(example);
-        return result;
-    }
-
-    @Override
-    public Page<ScmTrade> search(Map searchMap) {
-        int pageNum = 1;
-        int pageSize = 10;
-        Example example = new Example(ScmTrade.class);
-        if (searchMap != null){
-            Example.Criteria criteria = example.createCriteria();
-            if (StringUtil.isNotEmpty((String)searchMap.get("name"))){
-                criteria.andLike("tName", "%" + (String)searchMap.get("name") + "%");
-            }
             if (StringUtil.isNotEmpty((String)searchMap.get("startPrice"))){
-                criteria.andGreaterThanOrEqualTo("tPrice", Double.parseDouble((String)searchMap.get("startPrice")));
+                criteria.andGreaterThanOrEqualTo("rPrice", Double.parseDouble((String)searchMap.get("startPrice")));
             }
             if (StringUtil.isNotEmpty((String)searchMap.get("endPrice"))){
-                criteria.andLessThanOrEqualTo("tPrice", Double.parseDouble((String)searchMap.get("endPrice")));
+                criteria.andLessThanOrEqualTo("rPrice", Double.parseDouble((String)searchMap.get("endPrice")));
+            }
+            if (StringUtil.isNotEmpty((String)searchMap.get("startTime"))){
+                criteria.andGreaterThanOrEqualTo("rTime", Double.parseDouble((String)searchMap.get("startPrice")));
+            }
+            if (StringUtil.isNotEmpty((String)searchMap.get("endTime"))){
+                criteria.andLessThanOrEqualTo("rTime", Double.parseDouble((String)searchMap.get("endPrice")));
             }
             if (StringUtil.isNotEmpty((String) searchMap.get("pageNum"))){
                 pageNum = Integer.parseInt((String) searchMap.get("pageNum"));
             }
-            if (StringUtil.isNotEmpty((String) searchMap.get("pageSize"))){
+            if (StringUtil.isNotEmpty((String) searchMap.get("pageSize"))) {
                 pageSize = Integer.parseInt((String) searchMap.get("pageSize"));
             }
         }
         PageHelper.startPage(pageNum,pageSize);
-        return (Page<ScmTrade>) scmTradeMapper.selectByExample(example);
+        return (Page<ScmRent>) scmRentMapper.selectByExample(example);
     }
 
     @Override
-    public Page<ScmTrade> findByUserId(Integer uid, Map searchMap) {
+    public Page<ScmRent> findAllActive(Map searchMap) {
+        int pageNum = 1;
+        int pageSize = 10;
+        Example example = new Example(ScmTrade.class);
+        if (searchMap != null){
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andEqualTo("rState","1");
+            if (StringUtil.isNotEmpty((String) searchMap.get("pageNum"))){
+                pageNum = Integer.parseInt((String) searchMap.get("pageNum"));
+            }
+            if (StringUtil.isNotEmpty((String) searchMap.get("pageSize"))) {
+                pageSize = Integer.parseInt((String) searchMap.get("pageSize"));
+            }
+        }
+        return (Page<ScmRent>) scmRentMapper.selectByExample(example);
+    }
+
+    @Override
+    public Page<ScmRent> findByUserId(Integer uid, Map searchMap) {
         int pageNum = 1;
         int pageSize = 10;
         Example example = new Example(ScmTrade.class);
@@ -95,8 +93,7 @@ public class ScmTradeServiceImpl implements ScmTradeService {
             criteria.andEqualTo("cId", uid);
         }
         PageHelper.startPage(pageNum,pageSize);
-        return (Page<ScmTrade>) scmTradeMapper.selectByExample(example);
+        return (Page<ScmRent>) scmRentMapper.selectByExample(example);
     }
-
 
 }

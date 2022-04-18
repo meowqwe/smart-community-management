@@ -2,6 +2,7 @@ package com.zzl.smartcommunitymanagement.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -20,11 +21,11 @@ public class ScmProblem implements Serializable,Cloneable{
     /** 创建人 */
     private Integer cId ;
     /** 创建时间 */
-    private Date cTime ;
+    private LocalDateTime cTime ;
     /** 更新人 */
     private String uId ;
     /** 更新时间 */
-    private Date uTime ;
+    private LocalDateTime uTime ;
     /** 解决方案 */
     private String pSolution ;
 
@@ -53,11 +54,11 @@ public class ScmProblem implements Serializable,Cloneable{
         this.cId=cId;
     }
     /** 创建时间 */
-    public Date getCTime(){
+    public LocalDateTime getCTime(){
         return this.cTime;
     }
     /** 创建时间 */
-    public void setCTime(Date cTime){
+    public void setCTime(LocalDateTime cTime){
         this.cTime=cTime;
     }
     /** 更新人 */
@@ -69,11 +70,11 @@ public class ScmProblem implements Serializable,Cloneable{
         this.uId=uId;
     }
     /** 更新时间 */
-    public Date getUTime(){
+    public LocalDateTime getUTime(){
         return this.uTime;
     }
     /** 更新时间 */
-    public void setUTime(Date uTime){
+    public void setUTime(LocalDateTime uTime){
         this.uTime=uTime;
     }
     /** 解决方案 */

@@ -2,6 +2,7 @@ package com.zzl.smartcommunitymanagement.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -18,7 +19,7 @@ public class ScmCarport implements Serializable,Cloneable{
     /** 住户号 */
     private Integer hId ;
     /** 到期时间 */
-    private Date exTime ;
+    private LocalDateTime exTime ;
     /** 租金 */
     private Double cpRent ;
 
@@ -39,11 +40,11 @@ public class ScmCarport implements Serializable,Cloneable{
         this.hId=hId;
     }
     /** 到期时间 */
-    public Date getExTime(){
+    public LocalDateTime getExTime(){
         return this.exTime;
     }
     /** 到期时间 */
-    public void setExTime(Date exTime){
+    public void setExTime(LocalDateTime exTime){
         this.exTime=exTime;
     }
     /** 租金 */
