@@ -77,4 +77,15 @@ public class ScmLoginController {
         Page<ScmUser> list = scmUserService.searchByName(searchMap);
         return new PageResult(true,StatusCode.OK,"查询用户成功",list,(long)list.size());
     }
+
+    @RequestMapping("/updatePassword")
+    @ResponseBody
+    public Result updatePassword(HttpSession session, @RequestBody Map request) {
+        ScmUser user = (ScmUser) session.getAttribute("user");
+        if (StringUtil.isNotEmpty((String) request.get("newPassword"))) {
+            user.setUPassword((String) request.get("newPassword"));
+        }
+        scmUserService.updateUser(user);
+        return new Result(true, StatusCode.OK, "密码修改成功");
+    }
 }

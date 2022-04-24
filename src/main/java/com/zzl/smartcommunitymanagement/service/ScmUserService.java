@@ -2,6 +2,7 @@ package com.zzl.smartcommunitymanagement.service;
 
 import com.github.pagehelper.Page;
 import com.zzl.smartcommunitymanagement.domain.ScmUser;
+import org.apache.catalina.User;
 
 import java.util.List;
 import java.util.Map;
@@ -17,4 +18,11 @@ public interface ScmUserService {
      * name pageNum pageSize
      */
     public Page<ScmUser> searchByName(Map searchMap);
+
+    /**
+     * 根据用户更新
+     * @param user
+     * @return
+     */
+    public Integer updateUser(ScmUser user);
 }

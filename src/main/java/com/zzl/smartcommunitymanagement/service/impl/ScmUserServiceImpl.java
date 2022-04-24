@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.zzl.smartcommunitymanagement.dao.ScmUserMapper;
 import com.zzl.smartcommunitymanagement.domain.ScmUser;
 import com.zzl.smartcommunitymanagement.service.ScmUserService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -49,5 +50,10 @@ public class ScmUserServiceImpl implements ScmUserService {
         }
         PageHelper.startPage(pageNum, pageSize);
         return (Page<ScmUser>) scmUserMapper.selectByExample(example);
+    }
+
+    @Override
+    public Integer updateUser(ScmUser user) {
+        return scmUserMapper.updateByPrimaryKey(user);
     }
 }
