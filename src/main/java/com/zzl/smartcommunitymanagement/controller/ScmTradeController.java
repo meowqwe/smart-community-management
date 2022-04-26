@@ -83,7 +83,7 @@ public class ScmTradeController {
     @ResponseBody
     public PageResult findAll(@RequestBody Map searchMap) {
         Page<ScmTrade> allActive = scmTradeService.findAllActive(searchMap);
-        return new PageResult(true,StatusCode.OK,"查询成功！",allActive, (long) allActive.size());
+        return new PageResult(true,StatusCode.OK,"查询成功！",allActive, allActive.getTotal());
     }
 
     /**
@@ -95,7 +95,7 @@ public class ScmTradeController {
     @ResponseBody
     public PageResult search(@RequestBody Map searchMap) {
         Page<ScmTrade> trades = scmTradeService.search(searchMap);
-        return new PageResult(true,StatusCode.OK,"查询成功！",trades,(long) trades.size());
+        return new PageResult(true,StatusCode.OK,"查询成功！",trades,trades.getTotal());
     }
 
     /**
@@ -110,7 +110,7 @@ public class ScmTradeController {
         ScmUser user = (ScmUser) session.getAttribute("user");
         int uid = user.getUId();
         Page<ScmTrade> trades = scmTradeService.findByUserId(uid, searchMap);
-        return new PageResult(true, StatusCode.OK, "查询成功！", trades, (long) trades.size());
+        return new PageResult(true, StatusCode.OK, "查询成功！", trades, trades.getTotal());
     }
 
 }

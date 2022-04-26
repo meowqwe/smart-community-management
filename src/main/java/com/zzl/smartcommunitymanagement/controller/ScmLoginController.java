@@ -37,11 +37,11 @@ public class ScmLoginController {
     public Result login(HttpSession session, @RequestBody Map request) {
         String name = "";
         String password = "";
-        if (StringUtil.isEmpty((String) request.get("username")))
+        if (StringUtil.isNotEmpty((String) request.get("username")))
         {
             name = (String) request.get("username");
         }
-        if (StringUtil.isEmpty((String) request.get("password")))
+        if (StringUtil.isNotEmpty((String) request.get("password")))
         {
             password = (String) request.get("password");
         }
@@ -75,7 +75,7 @@ public class ScmLoginController {
     @ResponseBody
     public PageResult searchByName(@RequestBody Map searchMap) {
         Page<ScmUser> list = scmUserService.searchByName(searchMap);
-        return new PageResult(true,StatusCode.OK,"查询用户成功",list,(long)list.size());
+        return new PageResult(true,StatusCode.OK,"查询用户成功",list,list.getTotal());
     }
 
     @RequestMapping("/updatePassword")

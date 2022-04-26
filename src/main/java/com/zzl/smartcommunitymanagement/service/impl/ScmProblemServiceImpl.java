@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.StringUtil;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -20,6 +21,7 @@ public class ScmProblemServiceImpl implements ScmProblemService {
 
     @Override
     public Page<ScmProblem> findAll(Map searchMap) {
+
         int pageNum = 1;
         int pageSize = 10;
         if (searchMap != null){
@@ -31,7 +33,8 @@ public class ScmProblemServiceImpl implements ScmProblemService {
             }
         }
         PageHelper.startPage(pageNum,pageSize);
-        return (Page<ScmProblem>) scmProblemMapper.selectAll();
+        List<ScmProblem> problems = scmProblemMapper.selectAll();
+        return (Page<ScmProblem>) problems;
     }
 
     @Override
@@ -53,5 +56,15 @@ public class ScmProblemServiceImpl implements ScmProblemService {
         }
         PageHelper.startPage(pageNum,pageSize);
         return (Page<ScmProblem>) scmProblemMapper.selectByExample(example);
+    }
+
+    @Override
+    public Integer addProblem(ScmProblem problem) {
+        return scmProblemMapper.insert(problem);
+    }
+
+    @Override
+    public Integer deleteProblem(Integer pid) {
+        return scmProblemMapper.deleteByPrimaryKey(pid);
     }
 }

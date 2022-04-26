@@ -91,7 +91,7 @@ public class ScmRentController {
     @ResponseBody
     public PageResult findAll(@RequestBody Map searchMap) {
         Page<ScmRent> allActive = scmRentService.findAllActive(searchMap);
-        return new PageResult(true,StatusCode.OK,"查询成功！",allActive, (long) allActive.size());
+        return new PageResult(true,StatusCode.OK,"查询成功！",allActive, allActive.getTotal());
     }
 
     /**
@@ -103,7 +103,7 @@ public class ScmRentController {
     @ResponseBody
     public PageResult search(@RequestBody Map searchMap) {
         Page<ScmRent> trades = scmRentService.search(searchMap);
-        return new PageResult(true,StatusCode.OK,"查询成功！",trades,(long) trades.size());
+        return new PageResult(true,StatusCode.OK,"查询成功！",trades,trades.getTotal());
     }
 
     /**
@@ -118,7 +118,7 @@ public class ScmRentController {
         ScmUser user = (ScmUser) session.getAttribute("user");
         int uid = user.getUId();
         Page<ScmRent> trades = scmRentService.findByUserId(uid, searchMap);
-        return new PageResult(true, StatusCode.OK, "查询成功！", trades, (long) trades.size());
+        return new PageResult(true, StatusCode.OK, "查询成功！", trades, trades.getTotal());
     }
 
 }

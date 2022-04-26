@@ -23,7 +23,7 @@ public class ScmProblem implements Serializable,Cloneable{
     /** 创建时间 */
     private LocalDateTime cTime ;
     /** 更新人 */
-    private String uId ;
+    private Integer uId ;
     /** 更新时间 */
     private LocalDateTime uTime ;
     /** 解决方案 */
@@ -62,11 +62,11 @@ public class ScmProblem implements Serializable,Cloneable{
         this.cTime=cTime;
     }
     /** 更新人 */
-    public String getUId(){
+    public Integer getUId(){
         return this.uId;
     }
     /** 更新人 */
-    public void setUId(String uId){
+    public void setUId(Integer uId){
         this.uId=uId;
     }
     /** 更新时间 */

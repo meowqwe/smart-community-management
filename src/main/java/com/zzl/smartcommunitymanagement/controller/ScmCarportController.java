@@ -1,5 +1,6 @@
 package com.zzl.smartcommunitymanagement.controller;
 
+import com.github.pagehelper.Page;
 import com.zzl.smartcommunitymanagement.common.PageResult;
 import com.zzl.smartcommunitymanagement.common.StatusCode;
 import com.zzl.smartcommunitymanagement.domain.ScmCarport;
@@ -42,8 +43,8 @@ public class ScmCarportController {
         {
             return new PageResult(false, StatusCode.ERROR,"目前没有绑定住户", null,0l);
         }
-        List<ScmCarport> carports = scmCarportService.findByHid(household.getHId());
-        return new PageResult(true,StatusCode.OK,"请求成功",carports, (long) carports.size());
+        Page<ScmCarport> carports = (Page<ScmCarport>) scmCarportService.findByHid(household.getHId());
+        return new PageResult(true,StatusCode.OK,"请求成功",carports, carports.getTotal());
     }
 
 }

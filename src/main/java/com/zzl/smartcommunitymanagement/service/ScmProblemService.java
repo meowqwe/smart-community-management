@@ -2,6 +2,7 @@ package com.zzl.smartcommunitymanagement.service;
 
 import com.github.pagehelper.Page;
 import com.zzl.smartcommunitymanagement.domain.ScmProblem;
+import org.springframework.beans.factory.parsing.Problem;
 
 import java.util.Map;
 
@@ -22,5 +23,19 @@ public interface ScmProblemService {
      * @return
      */
     public Page<ScmProblem> search(Map searchMap);
+
+    /**
+     * 新增问题
+     * @param problem
+     * @return
+     */
+    public Integer addProblem(ScmProblem problem);
+
+    /**
+     * 删除问题
+     * @param pid
+     * @return
+     */
+    public Integer deleteProblem(Integer pid);
 
 }

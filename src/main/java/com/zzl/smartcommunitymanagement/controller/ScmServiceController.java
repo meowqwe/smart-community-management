@@ -34,7 +34,7 @@ public class ScmServiceController {
         if (all.isEmpty()) {
             return new PageResult(false, StatusCode.ERROR, "查询失败", null, 0l);
         }
-        return new PageResult(true, StatusCode.OK, "请求成功", all, (long) all.size());
+        return new PageResult(true, StatusCode.OK, "请求成功", all, all.getTotal());
     }
 
     /**
@@ -47,7 +47,7 @@ public class ScmServiceController {
         if (all.isEmpty()) {
             return new PageResult(false, StatusCode.ERROR, "查询失败", null, 0l);
         }
-        return new PageResult(true, StatusCode.OK, "请求成功", all, (long) all.size());
+        return new PageResult(true, StatusCode.OK, "请求成功", all, all.getTotal());
     }
 
     /**
