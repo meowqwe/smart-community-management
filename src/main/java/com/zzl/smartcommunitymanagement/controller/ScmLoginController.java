@@ -82,6 +82,11 @@ public class ScmLoginController {
     @ResponseBody
     public Result updatePassword(HttpSession session, @RequestBody Map request) {
         ScmUser user = (ScmUser) session.getAttribute("user");
+        if (StringUtil.isNotEmpty((String) request.get("oldPassword"))) {
+            if (!user.getUPassword().equals((String) request.get("oldPassword"))) {
+                return new Result(false, StatusCode.ERROR, "旧密码错误");
+            }
+        }
         if (StringUtil.isNotEmpty((String) request.get("newPassword"))) {
             user.setUPassword((String) request.get("newPassword"));
         }
