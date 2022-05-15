@@ -2,9 +2,9 @@ package com.zzl.smartcommunitymanagement.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.zzl.smartcommunitymanagement.dao.ScmProblemMapper;
-import com.zzl.smartcommunitymanagement.domain.ScmProblem;
-import com.zzl.smartcommunitymanagement.service.ScmProblemService;
+import com.zzl.smartcommunitymanagement.dao.ScmShopMapper;
+import com.zzl.smartcommunitymanagement.domain.ScmShop;
+import com.zzl.smartcommunitymanagement.service.ScmShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class ScmProblemServiceImpl implements ScmProblemService {
+public class ScmShopServiceImpl implements ScmShopService {
 
     @Autowired
-    private ScmProblemMapper scmProblemMapper;
+    private ScmShopMapper scmShopMapper;
 
     @Override
-    public Page<ScmProblem> findAll(Map searchMap) {
+    public Page<ScmShop> findAll(Map searchMap) {
         int pageNum = 1;
         int pageSize = 10;
         if (searchMap != null){
@@ -32,15 +32,15 @@ public class ScmProblemServiceImpl implements ScmProblemService {
             }
         }
         PageHelper.startPage(pageNum,pageSize);
-        List<ScmProblem> problems = scmProblemMapper.selectAll();
-        return (Page<ScmProblem>) problems;
+        List<ScmShop> problems = scmShopMapper.selectAll();
+        return (Page<ScmShop>) problems;
     }
 
     @Override
-    public Page<ScmProblem> search(Map searchMap) {
+    public Page<ScmShop> search(Map searchMap) {
         int pageNum = 1;
         int pageSize = 10;
-        Example example = new Example(ScmProblem.class);
+        Example example = new Example(ScmShop.class);
         if (searchMap != null){
             Example.Criteria criteria = example.createCriteria();
             if (StringUtil.isNotEmpty((String) searchMap.get("pageNum"))){
@@ -50,20 +50,23 @@ public class ScmProblemServiceImpl implements ScmProblemService {
                 pageSize = Integer.parseInt((String) searchMap.get("pageSize"));
             }
             if (StringUtil.isNotEmpty((String) searchMap.get("name"))){
-                criteria.andLike("pName", "%" + (String) searchMap.get("name") + "%");
+                criteria.andLike("shName", "%" + (String) searchMap.get("name") + "%");
+            }
+            if (StringUtil.isNotEmpty((String) searchMap.get("class"))){
+                criteria.andLike("shClass", "%" +(String) searchMap.get("class") + "%");
             }
         }
         PageHelper.startPage(pageNum,pageSize);
-        return (Page<ScmProblem>) scmProblemMapper.selectByExample(example);
+        return (Page<ScmShop>) scmShopMapper.selectByExample(example);
     }
 
     @Override
-    public Integer addProblem(ScmProblem problem) {
-        return scmProblemMapper.insert(problem);
+    public Integer addShop(ScmShop shop) {
+        return scmShopMapper.insert(shop);
     }
 
     @Override
-    public Integer deleteProblem(Integer pid) {
-        return scmProblemMapper.deleteByPrimaryKey(pid);
+    public Integer deleteShop(Integer shid) {
+        return scmShopMapper.deleteByPrimaryKey(shid);
     }
 }
