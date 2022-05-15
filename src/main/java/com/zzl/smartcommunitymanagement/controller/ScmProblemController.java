@@ -91,8 +91,8 @@ public class ScmProblemController {
     @ResponseBody
     public Result deleteProblem(@RequestBody Map request) {
         int pid = -1;
-        if (StringUtil.isNotEmpty((String) request.get("id"))) {
-            pid = Integer.parseInt((String) request.get("id"));
+        if (StringUtil.isNotEmpty(String.valueOf(request.get("pid")))) {
+            pid = (Integer) request.get("pid");
         }
         if (pid == -1) {
             return new Result(false, StatusCode.ERROR, "删除失败！");

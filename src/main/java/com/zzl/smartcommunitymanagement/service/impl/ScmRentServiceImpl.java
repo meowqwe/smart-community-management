@@ -63,18 +63,20 @@ public class ScmRentServiceImpl implements ScmRentService {
     public Page<ScmRent> findAllActive(Map searchMap) {
         int pageNum = 1;
         int pageSize = 10;
-        Example example = new Example(ScmTrade.class);
+        Example example = new Example(ScmRent.class);
         if (searchMap != null){
             Example.Criteria criteria = example.createCriteria();
-            criteria.andEqualTo("rState","1");
             if (StringUtil.isNotEmpty((String) searchMap.get("pageNum"))){
                 pageNum = Integer.parseInt((String) searchMap.get("pageNum"));
             }
             if (StringUtil.isNotEmpty((String) searchMap.get("pageSize"))) {
                 pageSize = Integer.parseInt((String) searchMap.get("pageSize"));
             }
+            criteria.andEqualTo("rState","1");
         }
-        return (Page<ScmRent>) scmRentMapper.selectByExample(example);
+        PageHelper.startPage(pageNum, pageSize);
+        Page<ScmRent> result = (Page<ScmRent>) scmRentMapper.selectByExample(example);
+        return result;
     }
 
     @Override

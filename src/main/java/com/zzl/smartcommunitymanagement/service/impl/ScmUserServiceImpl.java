@@ -56,4 +56,20 @@ public class ScmUserServiceImpl implements ScmUserService {
     public Integer updateUser(ScmUser user) {
         return scmUserMapper.updateByPrimaryKey(user);
     }
+
+    @Override
+    public Page<ScmUser> findAll(Map request) {
+        int pageNum = 1;
+        int pageSize = 10;
+        if (request != null){
+            if (StringUtil.isNotEmpty((String) request.get("pageNum"))){
+                pageNum = Integer.parseInt((String) request.get("pageNum"));
+            }
+            if (StringUtil.isNotEmpty((String) request.get("pageSize"))){
+                pageSize = Integer.parseInt((String) request.get("pageSize"));
+            }
+        }
+        PageHelper.startPage(pageNum,pageSize);
+        return (Page<ScmUser>)scmUserMapper.selectAll();
+    }
 }

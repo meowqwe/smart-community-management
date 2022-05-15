@@ -78,6 +78,27 @@ public class ScmLoginController {
         return new PageResult(true,StatusCode.OK,"查询用户成功",list,list.getTotal());
     }
 
+    /**
+     * 查询所有用户
+     * @param request
+     * @return
+     */
+    @RequestMapping("/findAll")
+    @ResponseBody
+    public PageResult findAll(@RequestBody Map request) {
+        Page<ScmUser> list = scmUserService.findAll(request);
+        if (list.isEmpty()) {
+            return new PageResult(false, StatusCode.ERROR, "获取失败",null, 0l);
+        }
+        return new PageResult(true, StatusCode.OK, null, list, list.getTotal());
+    }
+
+    /**
+     * 修改密码
+     * @param session
+     * @param request
+     * @return
+     */
     @RequestMapping("/updatePassword")
     @ResponseBody
     public Result updatePassword(HttpSession session, @RequestBody Map request) {

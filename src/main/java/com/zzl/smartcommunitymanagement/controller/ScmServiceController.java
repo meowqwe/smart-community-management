@@ -29,6 +29,7 @@ public class ScmServiceController {
      * pageNum pageSize
      * @return
      */
+    @RequestMapping("/findAll")
     public PageResult findAll(@RequestBody Map searchMap) {
         Page<ScmCommunityService> all = scmServiceService.findAll(searchMap);
         if (all.isEmpty()) {
@@ -42,6 +43,7 @@ public class ScmServiceController {
      * @param searchMap
      * @return
      */
+    @RequestMapping("/search")
     public PageResult search(@RequestBody Map searchMap) {
         Page<ScmCommunityService> all = scmServiceService.search(searchMap);
         if (all.isEmpty()) {
@@ -55,6 +57,7 @@ public class ScmServiceController {
      * @param request
      * @return
      */
+    @RequestMapping("/findWorker")
     public Result findWorker(@RequestBody Map request) {
         if (StringUtil.isEmpty((String) request.get("id"))) {
             return new Result(false, StatusCode.ERROR, "缺少服务id");

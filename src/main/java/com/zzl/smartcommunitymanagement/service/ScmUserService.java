@@ -25,4 +25,11 @@ public interface ScmUserService {
      * @return
      */
     public Integer updateUser(ScmUser user);
+
+    /**
+     * 查询所有
+     * @param request
+     * @return
+     */
+    Page<ScmUser> findAll(Map request);
 }
